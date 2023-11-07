@@ -1,0 +1,45 @@
+<!-- templates/myapp/index.html -->
+
+{% load static %}  <!-- Load the static tag to use static files like CSS -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Partnership Team</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">  <!-- Link to your CSS file using the static tag -->
+</head>
+<body>
+
+    <button class="back-to-login-btn" onclick="window.location.href='login.html'">Back to Login</button>
+
+    <div class="title-card">
+        <h1>Welcome Partnership Team</h1>
+    </div>
+
+    <a href="https://my.sager.com/SitePages/Home.aspx" class="portal-btn">Access Portal</a>
+
+    <div class="card">
+        <div class="content">
+            <button id="run-creation-contract-btn">Run Creation Contract Program</button>
+            <!-- Other buttons here -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle button click and make an AJAX call to run the Python script
+        document.getElementById('run-creation-contract-btn').addEventListener('click', function() {
+            fetch('/run_creation_contract/')  // Make sure the URL matches the one in your Django URL configuration
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred while trying to initiate the Creation Contract Program.');
+                });
+        });
+    </script>
+</body>
+</html>
